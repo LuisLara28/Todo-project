@@ -2,8 +2,9 @@
   
   margin: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
-  background-color: #18020c;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
 }

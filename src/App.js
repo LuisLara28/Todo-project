@@ -11,8 +11,9 @@ import "./styles/App.css"
 
 function App() {
   //STATE
-  const [todoList, setTodoList] = useState([])
-  const [copyTodoList, setCopyTodoList] = useState([])
+  const [todoList, setTodoList] = useState(null)
+  const [copyTodo, setCopyTodo] = useState([])
+
 
   //EFFECT
   useEffect(() => {
@@ -21,20 +22,32 @@ function App() {
         "https://jsonplaceholder.typicode.com/todos"
         );
       const result = await response.json();
-      const resultTodoList = result.slice(0,10);
+      const resultTodoList = result.slice(0,12);
       setTodoList(resultTodoList)
-      setCopyTodoList(resultTodoList)
+      setCopyTodo(resultTodoList)
     }; 
     
     handleTodoList();
     
     
   }, []);
+  
+  // useEffect(() => {
+  //   handleTasks()
+  //   handleCompleteTodo()
+  // },[])
+
 
   //FUNCIONES
   const handleCompleteTodo = (id) => {
-    setCopyTodoList(
+    setTodoList(
       todoList.map(todo => 
+        todo.id === id ? {...todo, completed: !todo.completed} : todo 
+      )
+    );
+    
+    setCopyTodo(
+      copyTodo.map(todo => 
         todo.id === id ? {...todo, completed: !todo.completed} : todo 
       )
     );
@@ -43,11 +56,11 @@ function App() {
   const handleTasks = (e) => {
     console.log(e)
     if(e === "All Tasks"){
-      setCopyTodoList(todoList)
+      setTodoList(copyTodo.filter(todo => todo))
     }else if( e === "Not Completed"){
-      setCopyTodoList(todoList.filter(todo => todo.completed))
+      setTodoList(copyTodo.filter(todo => todo.completed))
     }else if( e === "Completed"){
-      setCopyTodoList(todoList.filter(todo => !todo.completed))
+      setTodoList(copyTodo.filter(todo => !todo.completed))
     }
   }
 
@@ -57,8 +70,8 @@ function App() {
 
       <div className="todo-container">
         
-      {copyTodoList && copyTodoList.length > 0 ? (
-        copyTodoList.map(singleTodo => (
+      {todoList && todoList.length > 0 ? (
+        todoList.map(singleTodo => (
           <Todo 
           key={singleTodo.id} 
           title={singleTodo.title} 

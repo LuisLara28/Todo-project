@@ -2,8 +2,10 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(89, 29, 145);
+    background-color: #22223b;
     flex-direction: column;
+    padding: 2rem;
+    margin: 0;
 }
 
 .logo {
@@ -16,13 +18,13 @@ header {
     width: 150px;
     margin: 10px;
     border-radius: 10px;
-    background-color: #634b66;
+    background-color: #c9ada7;
     color: #fff;
     font-weight: bold;
 }
 
 .Complete-or-NotCompleted button:hover{
-    background-color: #89678d;
+    background-color: #9a8c98;
     
     
 }
